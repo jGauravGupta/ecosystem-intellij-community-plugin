@@ -51,14 +51,14 @@ runIde {
 }
 
 intellij {
-    version = '251.26927.53'
+    version = '2025.2.3'
     type = 'IC'
     pluginName = 'Payara IntelliJ Tools'
-    plugins = ['java', 'maven', 'maven-model', 'gradle', 'terminal']
+    plugins = ['java', 'maven', 'gradle', 'terminal']
 }
 
 patchPluginXml {
-    sinceBuild = "251.26927"
+    sinceBuild = "252.13776"
 }
 
 publishPlugin {
