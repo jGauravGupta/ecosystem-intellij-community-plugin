@@ -16,14 +16,19 @@
  */
 package fish.payara.micro.maven;
 
+import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.execution.configurations.RemoteConnectionCreator;
 import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.idea.maven.execution.MavenRunConfiguration;
 import org.jetbrains.idea.maven.execution.MavenRunnerParameters;
+import org.jetbrains.idea.maven.execution.run.MavenCommandLineState;
 
 public class MicroMavenConfiguration extends MavenRunConfiguration {
 
@@ -69,4 +74,8 @@ public class MicroMavenConfiguration extends MavenRunConfiguration {
         return new MicroMavenRemoteConnectionCreator(javaParameters, this);
     }
 
+    @Override
+    public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment env) {
+        return new MavenCommandLineState(env, this);
+    }
 }
