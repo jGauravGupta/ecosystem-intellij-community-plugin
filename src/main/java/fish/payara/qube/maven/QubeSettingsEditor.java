@@ -1,6 +1,6 @@
 /*
  * Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
- * Copyright (c) 2024 Payara Foundation and/or its affiliates and others.
+ * Copyright (c) 2024-2025 Payara Foundation and/or its affiliates and others.
  * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
