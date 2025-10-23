@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2024 Payara Foundation and/or its affiliates and others.
+ * Copyright (c) 2020 Payara Foundation and/or its affiliates and others.
  * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -14,44 +14,44 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud;
+package fish.payara.qube;
 
-import fish.payara.cloud.maven.CloudMavenConfigurationFactory;
+import fish.payara.qube.maven.QubeMavenConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
-import static fish.payara.PayaraConstants.CLOUD_ICON;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import static fish.payara.PayaraConstants.QUBE_ICON;
 
-public class PayaraCloudConfigurationType implements ConfigurationType {
+public class PayaraQubeConfigurationType implements ConfigurationType {
 
     @NotNull
     @Override
     public String getDisplayName() {
-        return "Payara Cloud";
+        return "Payara Qube";
     }
 
     @Override
     public String getConfigurationTypeDescription() {
-        return "Payara Cloud configuration type";
+        return "Payara Qube configuration type";
     }
 
     @Override
     public Icon getIcon() {
-        return CLOUD_ICON;
+        return QUBE_ICON;
     }
 
     @NotNull
     @Override
     public String getId() {
-        return "PAYARA_CLOUD_CONFIGURATION";
+        return "PAYARA_QUBE_CONFIGURATION";
     }
 
     @Override
     public ConfigurationFactory[] getConfigurationFactories() {
         return new ConfigurationFactory[]{
-            new CloudMavenConfigurationFactory(this)
+            new QubeMavenConfigurationFactory(this)
         };
     }
 }

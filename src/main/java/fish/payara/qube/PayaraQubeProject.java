@@ -14,7 +14,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud;
+package fish.payara.qube;
 
 import com.intellij.openapi.extensions.ExtensionsArea;
 import com.intellij.openapi.extensions.PluginDescriptor;
@@ -33,13 +33,13 @@ import kotlinx.coroutines.GlobalScope;
  *
  * @author gaurav.gupta@payara.fish
  */
-public abstract class PayaraCloudProject {
+public abstract class PayaraQubeProject {
 
     private final Project project;
 
     private final PsiFile buildFile;
 
-    protected PayaraCloudProject(Project project, PsiFile buildFile) {
+    protected PayaraQubeProject(Project project, PsiFile buildFile) {
         this.project = project;
         this.buildFile = buildFile;
     }

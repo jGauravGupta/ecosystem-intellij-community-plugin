@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.maven;
+package fish.payara.qube.maven;
 
 import com.intellij.execution.configuration.EnvironmentVariablesComponent;
 import com.intellij.execution.target.LanguageRuntimeConfiguration;
@@ -56,7 +56,7 @@ import java.util.concurrent.ExecutionException;
  *
  * @author Gaurav Gupta
  */
-public class CloudPanel {
+public class QubePanel {
 
     protected final Project myProject;
     private final boolean myRunConfigurationMode;
@@ -83,7 +83,7 @@ public class CloudPanel {
     private Map<String, List<Link>> namespacesCache = new HashMap<>();
     private final static String LOADING = "Loading...";
 
-    public CloudPanel(@NotNull Project p, boolean isRunConfiguration) {
+    public QubePanel(@NotNull Project p, boolean isRunConfiguration) {
         myProject = p;
         myRunConfigurationMode = isRunConfiguration;
     }
@@ -113,8 +113,8 @@ public class CloudPanel {
         panel.add(new JLabel("Goals:"), c);
         c.gridx = 1;
         List<String> goals = new ArrayList<String>();
-        goals.add(CloudMavenProject.DEV_GOAL);
-        goals.add(CloudMavenProject.DEPLOY_GOAL);
+        goals.add(QubeMavenProject.DEV_GOAL);
+        goals.add(QubeMavenProject.DEPLOY_GOAL);
         goalsComboBox = new ComboBox<>(goals.toArray(new String[0]));
         goalsComboBox.setEditable(true);
         panel.add(goalsComboBox, c);
@@ -240,7 +240,7 @@ public class CloudPanel {
             @Override
             protected List<Link> doInBackground() throws Exception {
                 // Fetch subscriptions in the background
-                return CloudUtil.getSubscriptions();
+                return QubeUtil.getSubscriptions();
             }
 
             @Override
@@ -279,7 +279,7 @@ public class CloudPanel {
                 @Override
                 protected List<Link> doInBackground() throws Exception {
                     // Fetch namespaces in the background
-                    return subscriptionsCache != null ? CloudUtil.getNamespaces(selectedSubscription) : Collections.emptyList();
+                    return subscriptionsCache != null ? QubeUtil.getNamespaces(selectedSubscription) : Collections.emptyList();
                 }
 
                 @Override
@@ -315,21 +315,21 @@ public class CloudPanel {
         String applicationName = applicationNameTextField.getText();
 
         if (namespace != null && !namespace.isEmpty() && !namespace.equals(LOADING)) {
-            mavenProperties.put(CloudMavenProject.NAMESPACE_ATTR, namespace);
+            mavenProperties.put(QubeMavenProject.NAMESPACE_ATTR, namespace);
         } else {
-            mavenProperties.remove(CloudMavenProject.NAMESPACE_ATTR);
+            mavenProperties.remove(QubeMavenProject.NAMESPACE_ATTR);
         }
 
         if (subscription != null && !subscription.isEmpty() && !subscription.equals(LOADING)) {
-            mavenProperties.put(CloudMavenProject.SUBSCRIPTION_ATTR, subscription);
+            mavenProperties.put(QubeMavenProject.SUBSCRIPTION_ATTR, subscription);
         } else {
-            mavenProperties.remove(CloudMavenProject.SUBSCRIPTION_ATTR);
+            mavenProperties.remove(QubeMavenProject.SUBSCRIPTION_ATTR);
         }
         
         if (applicationName != null && !applicationName.trim().isEmpty()) {
-            mavenProperties.put(CloudMavenProject.APPLICATION_NAME_ATTR, applicationName);
+            mavenProperties.put(QubeMavenProject.APPLICATION_NAME_ATTR, applicationName);
         } else {
-            mavenProperties.remove(CloudMavenProject.APPLICATION_NAME_ATTR);
+            mavenProperties.remove(QubeMavenProject.APPLICATION_NAME_ATTR);
         }
 
         myPropertiesPanel.setDataFromMap(mavenProperties);
@@ -347,7 +347,7 @@ public class CloudPanel {
         myProperties = result;
     }
 
-    protected void getData(MavenRunnerSettings data, CloudMavenConfiguration config) {
+    protected void getData(MavenRunnerSettings data, QubeMavenConfiguration config) {
         myDelegateToMavenCheckbox.setSelected(data.isDelegateBuildToMaven());
         myVMParametersEditor.setText(data.getVmOptions());
         mySkipTestsCheckBox.setSelected(data.isSkipTests());
@@ -363,22 +363,22 @@ public class CloudPanel {
 
         goalsComboBox.setSelectedItem(config.getGoals());
 
-        if (mavenProperties.containsKey(CloudMavenProject.SUBSCRIPTION_ATTR)) {
-            String subscriptionName = mavenProperties.get(CloudMavenProject.SUBSCRIPTION_ATTR);
+        if (mavenProperties.containsKey(QubeMavenProject.SUBSCRIPTION_ATTR)) {
+            String subscriptionName = mavenProperties.get(QubeMavenProject.SUBSCRIPTION_ATTR);
             subscriptionComboBox.setSelectedItem(subscriptionName);
             subscriptionValue = subscriptionName;
         } else {
             subscriptionComboBox.setSelectedItem(null);
         }
-        if (mavenProperties.containsKey(CloudMavenProject.NAMESPACE_ATTR)) {
-            String namespaceName = mavenProperties.get(CloudMavenProject.NAMESPACE_ATTR);
+        if (mavenProperties.containsKey(QubeMavenProject.NAMESPACE_ATTR)) {
+            String namespaceName = mavenProperties.get(QubeMavenProject.NAMESPACE_ATTR);
             namespaceComboBox.setSelectedItem(namespaceName);
             namespaceValue = namespaceName;
         } else {
             namespaceComboBox.setSelectedItem(null);
         }
-        if (mavenProperties.containsKey(CloudMavenProject.APPLICATION_NAME_ATTR)) {
-            String applicationName = mavenProperties.get(CloudMavenProject.APPLICATION_NAME_ATTR);
+        if (mavenProperties.containsKey(QubeMavenProject.APPLICATION_NAME_ATTR)) {
+            String applicationName = mavenProperties.get(QubeMavenProject.APPLICATION_NAME_ATTR);
             applicationNameTextField.setText(applicationName);
             applicationNameValue = applicationName;
         } else {
@@ -386,7 +386,7 @@ public class CloudPanel {
         }
     }
 
-    protected void setData(MavenRunnerSettings data, CloudMavenConfiguration config) {
+    protected void setData(MavenRunnerSettings data, QubeMavenConfiguration config) {
         data.setDelegateBuildToMaven(myDelegateToMavenCheckbox.isSelected());
         data.setVmOptions(myVMParametersEditor.getText().trim());
         data.setSkipTests(mySkipTestsCheckBox.isSelected());
@@ -402,21 +402,21 @@ public class CloudPanel {
         String applicationName = applicationNameTextField.getText();
 
         if (namespace != null && !namespace.isEmpty() && !namespace.equals(LOADING)) {
-            mavenProperties.put(CloudMavenProject.NAMESPACE_ATTR, namespace);
+            mavenProperties.put(QubeMavenProject.NAMESPACE_ATTR, namespace);
             namespaceValue = namespace;
         } else {
-            mavenProperties.remove(CloudMavenProject.NAMESPACE_ATTR);
+            mavenProperties.remove(QubeMavenProject.NAMESPACE_ATTR);
         }
 
         if (subscription != null && !subscription.isEmpty() && !subscription.equals(LOADING)) {
-            mavenProperties.put(CloudMavenProject.SUBSCRIPTION_ATTR, subscription);
+            mavenProperties.put(QubeMavenProject.SUBSCRIPTION_ATTR, subscription);
         } else {
-            mavenProperties.remove(CloudMavenProject.SUBSCRIPTION_ATTR);
+            mavenProperties.remove(QubeMavenProject.SUBSCRIPTION_ATTR);
         }
         if (applicationName != null && !applicationName.trim().isEmpty()) {
-            mavenProperties.put(CloudMavenProject.APPLICATION_NAME_ATTR, applicationName);
+            mavenProperties.put(QubeMavenProject.APPLICATION_NAME_ATTR, applicationName);
         } else {
-            mavenProperties.remove(CloudMavenProject.APPLICATION_NAME_ATTR);
+            mavenProperties.remove(QubeMavenProject.APPLICATION_NAME_ATTR);
         }
 
         data.setMavenProperties(mavenProperties);

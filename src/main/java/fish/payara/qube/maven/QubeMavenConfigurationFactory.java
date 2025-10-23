@@ -14,27 +14,27 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.maven;
+package fish.payara.qube.maven;
 
 import com.intellij.execution.configurations.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
-import static fish.payara.PayaraConstants.CLOUD_ICON;
 import javax.swing.Icon;
 import org.jetbrains.annotations.NotNull;
+import static fish.payara.PayaraConstants.QUBE_ICON;
 
-public class CloudMavenConfigurationFactory extends ConfigurationFactory {
+public class QubeMavenConfigurationFactory extends ConfigurationFactory {
 
-    private static final String FACTORY_NAME = "Cloud Maven";
+    private static final String FACTORY_NAME = "Qube Maven";
 
-    public CloudMavenConfigurationFactory(ConfigurationType type) {
+    public QubeMavenConfigurationFactory(ConfigurationType type) {
         super(type);
     }
 
     @NotNull
     @Override
     public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
-        return new CloudMavenConfiguration(project, this, FACTORY_NAME);
+        return new QubeMavenConfiguration(project, this, FACTORY_NAME);
     }
 
     @NotNull
@@ -52,7 +52,7 @@ public class CloudMavenConfigurationFactory extends ConfigurationFactory {
     @NotNull
     @Override
     public Icon getIcon() {
-        return CLOUD_ICON;
+        return QUBE_ICON;
     }
 
 }

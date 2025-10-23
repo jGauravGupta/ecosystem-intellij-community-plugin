@@ -14,13 +14,13 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.maven;
+package fish.payara.qube.maven;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
-import fish.payara.cloud.PayaraCloudProject;
+import fish.payara.qube.PayaraQubeProject;
 import fish.payara.util.MavenUtil;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -32,14 +32,14 @@ import static java.util.logging.Level.SEVERE;
 /**
  * @author gaurav.gupta@payara.fish
  */
-public class CloudMavenProject extends PayaraCloudProject {
+public class QubeMavenProject extends PayaraQubeProject {
 
-    private static final Logger LOG = Logger.getLogger(CloudMavenProject.class.getName());
+    private static final Logger LOG = Logger.getLogger(QubeMavenProject.class.getName());
 
-    public static final String CLOUD_GROUP_ID = "fish.payara.maven.plugins";
-    public static final String CLOUD_ARTIFACT_ID = "payara-cloud-maven-plugin";
-    public static final String CLOUD_VERSION = "1.0-Alpha4";
-    public static final String CLOUD_PLUGIN = "payara-cloud";
+    public static final String QUBE_GROUP_ID = "fish.payara.maven.plugins";
+    public static final String QUBE_ARTIFACT_ID = "payara-qube-maven-plugin";
+    public static final String QUBE_VERSION = "2.0.0";
+    public static final String QUBE_PLUGIN = "payara-qube";
     public static final String START_GOAL = "start";
     public static final String LOGIN_GOAL = "login";
     public static final String DEV_GOAL = "dev";
@@ -58,7 +58,7 @@ public class CloudMavenProject extends PayaraCloudProject {
     @Override
     public String getLoginCommand() {
         return String.format("mvn %s:%s:%s",
-                CLOUD_GROUP_ID, CLOUD_ARTIFACT_ID, LOGIN_GOAL
+                QUBE_GROUP_ID, QUBE_ARTIFACT_ID, LOGIN_GOAL
         );
     }
 
@@ -66,7 +66,7 @@ public class CloudMavenProject extends PayaraCloudProject {
     public String getDevCommand() {
         return String.format("mvn %s %s:%s:%s",
                 PACKAGE_GOAL,
-                CLOUD_GROUP_ID, CLOUD_ARTIFACT_ID, DEV_GOAL
+                QUBE_GROUP_ID, QUBE_ARTIFACT_ID, DEV_GOAL
         );
     }
 
@@ -74,7 +74,7 @@ public class CloudMavenProject extends PayaraCloudProject {
     public String getDeployCommand() {
         return String.format("mvn %s %s:%s:%s",
                 PACKAGE_GOAL,
-                CLOUD_GROUP_ID, CLOUD_ARTIFACT_ID, DEPLOY_GOAL
+                QUBE_GROUP_ID, QUBE_ARTIFACT_ID, DEPLOY_GOAL
         );
     }
 
@@ -82,7 +82,7 @@ public class CloudMavenProject extends PayaraCloudProject {
     public String getUndeployCommand() {
         return String.format("mvn %s %s:%s:%s",
                 PACKAGE_GOAL,
-                CLOUD_GROUP_ID, CLOUD_ARTIFACT_ID, UNDEPLOY_GOAL
+                QUBE_GROUP_ID, QUBE_ARTIFACT_ID, UNDEPLOY_GOAL
         );
     }
 
@@ -90,47 +90,47 @@ public class CloudMavenProject extends PayaraCloudProject {
     public String getStartCommand() {
         return String.format("mvn %s %s:%s:%s",
                 PACKAGE_GOAL,
-                CLOUD_GROUP_ID, CLOUD_ARTIFACT_ID, START_GOAL
+                QUBE_GROUP_ID, QUBE_ARTIFACT_ID, START_GOAL
         );
     }
 
     @Override
     public String getStopCommand() {
         return String.format("mvn %s:%s:%s",
-                CLOUD_GROUP_ID, CLOUD_ARTIFACT_ID, STOP_GOAL
+                QUBE_GROUP_ID, QUBE_ARTIFACT_ID, STOP_GOAL
         );
     }
 
     @Override
     public String getApplicationCommand() {
         return String.format("mvn %s:%s:%s",
-                CLOUD_GROUP_ID, CLOUD_ARTIFACT_ID, APPLICATION_GOAL
+                QUBE_GROUP_ID, QUBE_ARTIFACT_ID, APPLICATION_GOAL
         );
     }
 
     @Override
     public String getNamespaceCommand() {
         return String.format("mvn %s:%s:%s",
-                CLOUD_GROUP_ID, CLOUD_ARTIFACT_ID, NAMESPACE_GOAL
+                QUBE_GROUP_ID, QUBE_ARTIFACT_ID, NAMESPACE_GOAL
         );
     }
 
     @Override
     public String getSubscriptionCommand() {
         return String.format("mvn %s:%s:%s",
-                CLOUD_GROUP_ID, CLOUD_ARTIFACT_ID, SUBSCRIPTION_GOAL
+                QUBE_GROUP_ID, QUBE_ARTIFACT_ID, SUBSCRIPTION_GOAL
         );
     }
 
-    public static CloudMavenProject getInstance(Project project) {
+    public static QubeMavenProject getInstance(Project project) {
         PsiFile pom = getPomFile(project);
         if (pom != null) {
-            return new CloudMavenProject(project, pom);
+            return new QubeMavenProject(project, pom);
         }
         return null;
     }
 
-    public CloudMavenProject(Project project, PsiFile pom) {
+    public QubeMavenProject(Project project, PsiFile pom) {
         super(project, pom);
     }
 
@@ -160,14 +160,14 @@ public class CloudMavenProject extends PayaraCloudProject {
 
     /**
      * @param pomFile the pom.xml file
-     * @return true if pom.xml file includes Payara Cloud Maven plugin
+     * @return true if pom.xml file includes Payara Qube Maven plugin
      */
     private static boolean isValidPom(PsiFile pomFile) {
         try {
             Node pomRoot = MavenUtil.getPomRootNode(pomFile);
             return MavenUtil.getBuildNodes(pomRoot)
                     .stream()
-                    .anyMatch(CloudMavenProject::isCloudPlugin);
+                    .anyMatch(QubeMavenProject::isQubePlugin);
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             LOG.log(SEVERE, null, ex);
         }
@@ -176,10 +176,10 @@ public class CloudMavenProject extends PayaraCloudProject {
 
     /**
      * @param buildNode
-     * @return true if pom.xml file includes Payara Cloud Maven plugin
+     * @return true if pom.xml file includes Payara Qube Maven plugin
      */
-    private static boolean isCloudPlugin(Node buildNode) {
-        return MavenUtil.getPluginNode(buildNode, CLOUD_GROUP_ID, CLOUD_ARTIFACT_ID) != null;
+    private static boolean isQubePlugin(Node buildNode) {
+        return MavenUtil.getPluginNode(buildNode, QUBE_GROUP_ID, QUBE_ARTIFACT_ID) != null;
     }
 
 }

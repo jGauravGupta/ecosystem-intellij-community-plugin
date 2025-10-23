@@ -14,13 +14,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.actions;
+package fish.payara.qube.actions;
 
-
-import com.intellij.openapi.ui.Messages;
 import com.intellij.terminal.JBTerminalWidget;
-import fish.payara.cloud.PayaraCloudProject;
-import fish.payara.cloud.maven.CloudMavenProject;
+import fish.payara.qube.PayaraQubeProject;
 import static java.util.logging.Level.WARNING;
 import java.util.logging.Logger;
 
@@ -28,27 +25,17 @@ import java.util.logging.Logger;
  *
  * @author gaurav.gupta@payara.fish
  */
-public class CloudListNamespaceAction extends CloudAction {
+public class QubeStopAction extends QubeAction {
 
-    private static final Logger LOG = Logger.getLogger(CloudListNamespaceAction.class.getName());
+    private static final Logger LOG = Logger.getLogger(QubeStopAction.class.getName());
 
     @Override
-    public void onAction(PayaraCloudProject project) {
+    public void onAction(PayaraQubeProject project) {
         String projectName;
         projectName = project.getProjectName();
         JBTerminalWidget terminal = getTerminal(project.getProject(), projectName);
         if (terminal != null) {
-            String subscriptionValue = Messages.showInputDialog(
-                project.getProject(),
-                "Subscription:",
-                "List Cloud Namespaces",
-                Messages.getQuestionIcon()
-            );
-            if (subscriptionValue != null && !subscriptionValue.trim().isEmpty()) {
-                executeCommand(terminal, project.getNamespaceCommand() + " -D" + CloudMavenProject.SUBSCRIPTION_ATTR + "='" + subscriptionValue + "'");
-            } else {
-                executeCommand(terminal, project.getNamespaceCommand());
-            }
+            executeCommand(terminal, project.getStopCommand());
         } else {
             LOG.log(WARNING, "Shell window for {0} is not available.", projectName);
         }

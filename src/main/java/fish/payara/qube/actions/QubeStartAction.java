@@ -14,10 +14,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.actions;
+package fish.payara.qube.actions;
 
 import com.intellij.terminal.JBTerminalWidget;
-import fish.payara.cloud.PayaraCloudProject;
+import fish.payara.qube.PayaraQubeProject;
 
 import java.util.logging.Logger;
 
@@ -27,17 +27,17 @@ import static java.util.logging.Level.WARNING;
  *
  * @author gaurav.gupta@payara.fish
  */
-public class CloudLoginAction extends CloudAction {
+public class QubeStartAction extends QubeAction {
 
-    private static final Logger LOG = Logger.getLogger(CloudLoginAction.class.getName());
+    private static final Logger LOG = Logger.getLogger(QubeStartAction.class.getName());
 
     @Override
-    public void onAction(PayaraCloudProject project) {
+    public void onAction(PayaraQubeProject project) {
         String projectName;
         projectName = project.getProjectName();
         JBTerminalWidget terminal = getTerminal(project.getProject(), projectName + " instance");
         if (terminal != null) {
-            executeCommand(terminal, project.getLoginCommand());
+            executeCommand(terminal, project.getStartCommand());
         } else {
             LOG.log(WARNING, "Shell window for {0} is not available.", projectName);
         }

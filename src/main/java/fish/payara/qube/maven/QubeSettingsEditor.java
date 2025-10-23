@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.maven;
+package fish.payara.qube.maven;
 
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
@@ -34,19 +34,19 @@ import javax.swing.*;
  * @author Gaurav Gupta
  */
 
-public class CloudSettingsEditor extends SettingsEditor<CloudMavenConfiguration> {
+public class QubeSettingsEditor extends SettingsEditor<QubeMavenConfiguration> {
 
-  private final CloudPanel myPanel;
+  private final QubePanel myPanel;
 
   private JCheckBox myUseProjectSettings;
 
-  public CloudSettingsEditor(@NotNull Project project) {
-    myPanel = new CloudPanel(project, true);
+  public QubeSettingsEditor(@NotNull Project project) {
+    myPanel = new QubePanel(project, true);
   }
 
   @Override
-  protected void resetEditorFrom(@NotNull CloudMavenConfiguration runConfiguration) {
-    String targetName = com.intellij.ide.DataManager.getInstance().getDataContext(this.getComponent())
+  protected void resetEditorFrom(@NotNull QubeMavenConfiguration runConfiguration) {
+        String targetName = com.intellij.ide.DataManager.getInstance().getDataContext(this.getComponent())
       .getData(com.intellij.execution.impl.SingleConfigurationConfigurable.RUN_ON_TARGET_NAME_KEY);
     boolean localTarget = targetName == null;
     if (localTarget) {
@@ -66,7 +66,7 @@ public class CloudSettingsEditor extends SettingsEditor<CloudMavenConfiguration>
   }
 
   @Override
-  protected void applyEditorTo(@NotNull CloudMavenConfiguration runConfiguration) throws ConfigurationException {
+  protected void applyEditorTo(@NotNull QubeMavenConfiguration runConfiguration) throws ConfigurationException {
     String targetName = com.intellij.ide.DataManager.getInstance().getDataContext(this.getComponent())
       .getData(com.intellij.execution.impl.SingleConfigurationConfigurable.RUN_ON_TARGET_NAME_KEY);
     boolean localTarget = targetName == null;

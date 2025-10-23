@@ -14,22 +14,22 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.maven;
+package fish.payara.qube.maven;
 
 import java.util.List;
 import javax.ws.rs.core.Link;
-import fish.payara.tools.cloud.ApplicationContext;
-import fish.payara.tools.cloud.ListSubscriptions;
-import fish.payara.tools.cloud.ListNamespaces;
+import fish.payara.tools.qube.ApplicationContext;
+import fish.payara.tools.qube.ListSubscriptions;
+import fish.payara.tools.qube.ListNamespaces;
 
 /**
  *
  * @author Gaurav Gupta
  */
-public class CloudUtil {
+public class QubeUtil {
 
     private static String CLIENT_ID = "qeqSpqVZtHGbr0YU75Z9p87HMle0RA5a";
-    private static String CLIENT_NAME = "Payara Cloud Maven Plugin";
+    private static String CLIENT_NAME = "Payara Qube Maven Plugin";
 
     static List<Link> getSubscriptions() throws Exception {
         ApplicationContext context = getApplicationContextBuilder(true).build();
@@ -49,7 +49,7 @@ public class CloudUtil {
 
     private static ApplicationContext.Builder getApplicationContextBuilder(boolean intractive) {
         ApplicationContext.Builder builder = ApplicationContext.builder(CLIENT_ID, CLIENT_NAME)
-                .clientOutput(new CloudMavenOutput(intractive))
+                .clientOutput(new QubeMavenOutput(intractive))
                 .interactive(intractive);
         return builder;
     }
