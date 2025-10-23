@@ -16,7 +16,6 @@
  */
 package fish.payara.server.maven;
 
-import fish.payara.cloud.maven.*;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;

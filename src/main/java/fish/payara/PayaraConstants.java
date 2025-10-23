@@ -24,7 +24,7 @@ import javax.swing.Icon;
 public interface PayaraConstants {
 
     Icon PAYARA_ICON = IconLoader.getIcon("/icons/payara.svg");
-    Icon CLOUD_ICON = IconLoader.getIcon("/icons/cloud.svg");
+    Icon QUBE_ICON = IconLoader.getIcon("/icons/qube.svg");
     int DEFAULT_DEBUG_PORT = 9007;
 
     String PAYARA_BIN_DIRECTORY_NAME = "bin";
