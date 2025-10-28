@@ -14,7 +14,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.actions;
+package fish.payara.qube.actions;
 
 import com.intellij.notification.*;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -28,8 +28,8 @@ import com.intellij.ui.content.Content;
 import com.jediterm.terminal.TtyConnector;
 import fish.payara.PayaraBundle;
 import fish.payara.PayaraConstants;
-import fish.payara.cloud.maven.CloudMavenProject;
-import fish.payara.cloud.PayaraCloudProject;
+import fish.payara.qube.maven.QubeMavenProject;
+import fish.payara.qube.PayaraQubeProject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.terminal.LocalTerminalDirectRunner;
 import org.jetbrains.plugins.terminal.ShellTerminalWidget;
@@ -45,9 +45,9 @@ import java.util.logging.Logger;
  *
  * @author gaurav.gupta@payara.fish
  */
-public abstract class CloudAction extends AnAction {
+public abstract class QubeAction extends AnAction {
 
-    private static final Logger LOG = Logger.getLogger(CloudAction.class.getName());
+    private static final Logger LOG = Logger.getLogger(QubeAction.class.getName());
 
     private static final String TOOL_WINDOW_ID = "Terminal";
 
@@ -60,30 +60,30 @@ public abstract class CloudAction extends AnAction {
                 return;
             }
 
-            PayaraCloudProject cloudProject = CloudMavenProject.getInstance(project);
-            if (cloudProject == null) {
-                LOG.warning(PayaraBundle.message("CloudAction.notification.message"));
+            PayaraQubeProject qubeProject = QubeMavenProject.getInstance(project);
+            if (qubeProject == null) {
+                LOG.warning(PayaraBundle.message("QubeAction.notification.message"));
                 Notifications.Bus.notify(
                         new Notification(
-                                PayaraBundle.message("CloudAction.notification.group"),
-                                PayaraConstants.CLOUD_ICON,
+                                PayaraBundle.message("QubeAction.notification.group"),
+                                PayaraConstants.QUBE_ICON,
                                 e.getPresentation().getDescription(),
                                 "",
-                                PayaraBundle.message("CloudAction.notification.message"),
+                                PayaraBundle.message("QubeAction.notification.message"),
                                 NotificationType.WARNING,
                                 NotificationListener.URL_OPENING_LISTENER
                         ), project);
                 return;
             }
-            if (cloudProject != null) {
-                onAction(cloudProject);
+            if (qubeProject != null) {
+                onAction(qubeProject);
             }
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
     }
 
-    public abstract void onAction(PayaraCloudProject project);
+    public abstract void onAction(PayaraQubeProject project);
 
     public JBTerminalWidget getTerminal(Project project, String tabName) {
         ToolWindowManager windowManager = ToolWindowManager.getInstance(project);

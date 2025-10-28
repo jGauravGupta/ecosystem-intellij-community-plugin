@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Payara Foundation and/or its affiliates and others.
+ * Copyright (c) 2024-2025 Payara Foundation and/or its affiliates and others.
  * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -14,9 +14,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.maven;
+package fish.payara.qube.maven;
 
-import fish.payara.cloud.client.ClientOutput;
+import fish.payara.qube.client.ClientOutput;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
@@ -27,13 +27,13 @@ import java.util.logging.Logger;
  *
  * @author Gaurav Gupta
  */
-public class CloudMavenOutput implements ClientOutput {
+public class QubeMavenOutput implements ClientOutput {
 
-    private static final Logger LOG = Logger.getLogger(CloudMavenOutput.class.getName());
+    private static final Logger LOG = Logger.getLogger(QubeMavenOutput.class.getName());
 
     private final boolean interactive;
 
-    public CloudMavenOutput(boolean interactive) {
+    public QubeMavenOutput(boolean interactive) {
         this.interactive = interactive;
     }
 

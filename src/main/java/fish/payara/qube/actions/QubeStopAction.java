@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Payara Foundation and/or its affiliates and others.
+ * Copyright (c) 2024-2025 Payara Foundation and/or its affiliates and others.
  * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -14,30 +14,28 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.actions;
+package fish.payara.qube.actions;
 
 import com.intellij.terminal.JBTerminalWidget;
-import fish.payara.cloud.PayaraCloudProject;
-
-import java.util.logging.Logger;
-
+import fish.payara.qube.PayaraQubeProject;
 import static java.util.logging.Level.WARNING;
+import java.util.logging.Logger;
 
 /**
  *
  * @author gaurav.gupta@payara.fish
  */
-public class CloudDeployAction extends CloudAction {
+public class QubeStopAction extends QubeAction {
 
-    private static final Logger LOG = Logger.getLogger(CloudDeployAction.class.getName());
+    private static final Logger LOG = Logger.getLogger(QubeStopAction.class.getName());
 
     @Override
-    public void onAction(PayaraCloudProject project) {
+    public void onAction(PayaraQubeProject project) {
         String projectName;
         projectName = project.getProjectName();
-        JBTerminalWidget terminal = getTerminal(project.getProject(), projectName + " instance");
+        JBTerminalWidget terminal = getTerminal(project.getProject(), projectName);
         if (terminal != null) {
-            executeCommand(terminal, project.getDeployCommand());
+            executeCommand(terminal, project.getStopCommand());
         } else {
             LOG.log(WARNING, "Shell window for {0} is not available.", projectName);
         }

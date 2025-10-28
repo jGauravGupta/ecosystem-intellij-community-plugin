@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Payara Foundation and/or its affiliates and others.
+ * Copyright (c) 2024-2025 Payara Foundation and/or its affiliates and others.
  * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -14,7 +14,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.maven;
+package fish.payara.qube.maven;
 
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.JavaParameters;
@@ -36,11 +36,11 @@ import org.jetbrains.idea.maven.execution.MavenRunConfiguration;
 import org.jetbrains.idea.maven.execution.MavenRunnerParameters;
 import org.jetbrains.idea.maven.execution.run.configuration.MavenRunConfigurationSettingsEditor;
 
-public class CloudMavenConfiguration extends MavenRunConfiguration {
+public class QubeMavenConfiguration extends MavenRunConfiguration {
 
-    private String goals = CloudMavenProject.DEV_GOAL;
+    private String goals = QubeMavenProject.DEV_GOAL;
 
-    protected CloudMavenConfiguration(Project project, ConfigurationFactory factory, String name) {
+    protected QubeMavenConfiguration(Project project, ConfigurationFactory factory, String name) {
         super(project, factory, name);
     }
 
@@ -62,19 +62,19 @@ public class CloudMavenConfiguration extends MavenRunConfiguration {
                 parameters.setWorkingDirPath(super.getProject().getBasePath());
             }
             if (parameters.getGoals().isEmpty()) {
-                CloudMavenProject mavenProject = CloudMavenProject.getInstance(super.getProject());
+                QubeMavenProject mavenProject = QubeMavenProject.getInstance(super.getProject());
                 if (mavenProject == null) {
                     parameters.getGoals().add(String.format(
                             "%s:%s:%s:%s",
-                            CloudMavenProject.CLOUD_GROUP_ID,
-                            CloudMavenProject.CLOUD_ARTIFACT_ID,
-                            CloudMavenProject.CLOUD_VERSION,
+                            QubeMavenProject.QUBE_GROUP_ID,
+                            QubeMavenProject.QUBE_ARTIFACT_ID,
+                            QubeMavenProject.QUBE_VERSION,
                             getGoals()
                     ));
                 } else {
                     parameters.getGoals().add(String.format(
                             "%s:%s",
-                            CloudMavenProject.CLOUD_PLUGIN,
+                            QubeMavenProject.QUBE_PLUGIN,
                             getGoals()
                     ));
                 }
@@ -83,8 +83,8 @@ public class CloudMavenConfiguration extends MavenRunConfiguration {
        return LazyEditorFactory.create(this);
     }
     private static final class LazyEditorFactory {
-        static @NotNull SettingsEditor<? extends RunConfiguration> create(@NotNull CloudMavenConfiguration configuration) {
-            return new CloudSettingsEditor(configuration.getProject());
+        static @NotNull SettingsEditor<? extends RunConfiguration> create(@NotNull QubeMavenConfiguration configuration) {
+            return new QubeSettingsEditor(configuration.getProject());
         }
     }
 
@@ -94,11 +94,11 @@ public class CloudMavenConfiguration extends MavenRunConfiguration {
             public RemoteConnection createRemoteConnection(ExecutionEnvironment environment) {
                 Notifications.Bus.notify(
                         new Notification(
-                                PayaraBundle.message("CloudDebug.notification.group"),
-                                PayaraConstants.CLOUD_ICON,
-                                PayaraBundle.message("CloudDebug.notification.group"),
+                                PayaraBundle.message("QubeDebug.notification.group"),
+                                PayaraConstants.QUBE_ICON,
+                                PayaraBundle.message("QubeDebug.notification.group"),
                                 "",
-                                PayaraBundle.message("CloudDebug.notification.message"),
+                                PayaraBundle.message("QubeDebug.notification.message"),
                                 NotificationType.WARNING,
                                 NotificationListener.URL_OPENING_LISTENER
                         ), null);
