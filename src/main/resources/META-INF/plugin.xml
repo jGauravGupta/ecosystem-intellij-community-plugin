@@ -1,8 +1,8 @@
 <idea-plugin>
-    <id>fish.payara.intellij</id>
-    <name>Payara Tools</name>
+    <id>fish.payara.micro.intellij</id>
+    <name>Payara Community Tools</name>
     <description><![CDATA[
-        Payara Tools allows configuring and using the Payara Platform, 
+        Payara Community Tools allows configuring and using the Payara Platform, 
         for deploying and managing applications from the IDEA.  
 
         The plugin also provides seamless integration with Payara Qube for deploying and managing Jakarta EE applications:
@@ -16,7 +16,7 @@
         
         Download the <a href="https://plugins.jetbrains.com/plugin/15445-payara-community-tools/">
         Payara Tools</a> available in the IntelliJ IDEA Community 
-        to develop the application with the Payara qube, Payara Micro and Payara Server.
+        to develop the application with the Payara Qube, Payara Micro and Payara Server.
         
         Checkout the <a href="https://docs.payara.fish/community/docs/5.2020.6/documentation/ecosystem/intellij-plugin/README.html">
         usage instructions</a> of Payara IntelliJ tools for more details.
