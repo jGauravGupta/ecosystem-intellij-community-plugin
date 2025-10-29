@@ -23,8 +23,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'fish.payara.tools:payara-cloud:1.0-Alpha4'
-    implementation 'fish.payara.cloud:cloud-api:1.0.1'
+    implementation 'fish.payara.tools:payara-qube:2.0.0'
+    implementation 'fish.payara.qube:qube-api:2.0.0'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.1'
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Payara Foundation and/or its affiliates and others.
+ * Copyright (c) 2024-2025 Payara Foundation and/or its affiliates and others.
  * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -14,13 +14,13 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-package fish.payara.cloud.actions;
+package fish.payara.qube.actions;
 
 import com.intellij.openapi.ui.Messages;
 import com.intellij.terminal.JBTerminalWidget;
 import fish.payara.PayaraConstants;
-import fish.payara.cloud.PayaraCloudProject;
-import fish.payara.cloud.maven.CloudMavenProject;
+import fish.payara.qube.PayaraQubeProject;
+import fish.payara.qube.maven.QubeMavenProject;
 import javax.swing.*;
 import java.awt.*;
 import static java.util.logging.Level.WARNING;
@@ -30,12 +30,12 @@ import java.util.logging.Logger;
  *
  * @author gaurav.gupta@payara.fish
  */
-public class CloudListApplicationAction extends CloudAction {
+public class QubeListApplicationAction extends QubeAction {
 
-    private static final Logger LOG = Logger.getLogger(CloudListApplicationAction.class.getName());
+    private static final Logger LOG = Logger.getLogger(QubeListApplicationAction.class.getName());
 
     @Override
-    public void onAction(PayaraCloudProject project) {
+    public void onAction(PayaraQubeProject project) {
         String projectName = project.getProjectName();
         JBTerminalWidget terminal = getTerminal(project.getProject(), projectName);
         if (terminal != null) {
@@ -62,13 +62,12 @@ public class CloudListApplicationAction extends CloudAction {
             JTextField namespaceField = new JTextField(20);
             panel.add(namespaceField, gbc);
 
-            int result = JOptionPane.showConfirmDialog(
-                null,
+            int result = JOptionPane.showConfirmDialog(null,
                 panel,
-                "List Cloud Applications",
+                "List Qube Applications",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
-                PayaraConstants.CLOUD_ICON
+                PayaraConstants.QUBE_ICON
             );
 
             if (result == JOptionPane.OK_OPTION) {
@@ -77,10 +76,10 @@ public class CloudListApplicationAction extends CloudAction {
 
                 String cmd = project.getApplicationCommand();
                 if (!subscriptionValue.isEmpty()) {
-                    cmd += " -D" + CloudMavenProject.SUBSCRIPTION_ATTR + "='" + subscriptionValue + "'";
+                    cmd += " -D" + QubeMavenProject.SUBSCRIPTION_ATTR + "='" + subscriptionValue + "'";
                 }
                 if (!namespaceValue.isEmpty()) {
-                    cmd += " -D" + CloudMavenProject.NAMESPACE_ATTR + "='" + namespaceValue + "'";
+                    cmd += " -D" + QubeMavenProject.NAMESPACE_ATTR + "='" + namespaceValue + "'";
                 }
                 executeCommand(terminal, cmd);
             }

@@ -5,18 +5,18 @@
         Payara Community Tools allows configuring and using the Payara Platform, 
         for deploying and managing applications from the IDEA.  
 
-        The plugin also provides seamless integration with Payara Cloud for deploying and managing Jakarta EE applications:
+        The plugin also provides seamless integration with Payara Qube for deploying and managing Jakarta EE applications:
         <ul>
-            <li>Login to the Payara Cloud platform.</li>
-            <li>Start and Stop Payara Cloud applications.</li>
-            <li>Launch Payara Cloud applications in development mode.</li>
-            <li>Deploy and undeploy applications on Payara Cloud.</li>
-            <li>Retrieve lists of applications, namespaces, and subscriptions from the Payara Cloud.</li>
+            <li>Login to the Payara Qube platform.</li>
+            <li>Start and Stop Payara Qube applications.</li>
+            <li>Launch Payara Qube applications in development mode.</li>
+            <li>Deploy and undeploy applications on Payara Qube.</li>
+            <li>Retrieve lists of applications, namespaces, and subscriptions from the Payara Qube.</li>
         </ul>
         
         Download the <a href="https://plugins.jetbrains.com/plugin/15445-payara-community-tools/">
         Payara Tools</a> available in the IntelliJ IDEA Community 
-        to develop the application with the Payara cloud, Payara Micro and Payara Server.
+        to develop the application with the Payara Qube, Payara Micro and Payara Server.
         
         Checkout the <a href="https://docs.payara.fish/community/docs/5.2020.6/documentation/ecosystem/intellij-plugin/README.html">
         usage instructions</a> of Payara IntelliJ tools for more details.
@@ -37,62 +37,62 @@
         <configurationType implementation="fish.payara.server.PayaraServerConfigurationType"/>
         <moduleBuilder builderClass="fish.payara.micro.project.PayaraMicroModuleBuilder" order="last" id="PAYARA_MICRO_MODULE_BUILDER"/>
         <moduleType implementationClass="fish.payara.micro.project.PayaraMicroModuleType" id="JAVA_MODULE"/>
-        <configurationType implementation="fish.payara.cloud.PayaraCloudConfigurationType"/>
+        <configurationType implementation="fish.payara.qube.PayaraQubeConfigurationType"/>
     </extensions>
     
     <actions>
- 	<action id="fish.payara.cloud.actions.CloudStartAction"
-                class="fish.payara.cloud.actions.CloudStartAction"
-                text="Start Payara Cloud Application"
-                description="Start Payara Cloud Application"
+ 	<action id="fish.payara.qube.actions.QubeStartAction"
+                class="fish.payara.qube.actions.QubeStartAction"
+                text="Start Payara Qube Application"
+                description="Start Payara Qube Application"
                 icon="AllIcons.Actions.Execute" />
         
-        <action id="fish.payara.cloud.actions.CloudStopAction"
-                class="fish.payara.cloud.actions.CloudStopAction"
-                text="Stop Payara Cloud Application"
-                description="Stop Payara Cloud Application"
+        <action id="fish.payara.qube.actions.QubeStopAction"
+                class="fish.payara.qube.actions.QubeStopAction"
+                text="Stop Payara Qube Application"
+                description="Stop Payara Qube Application"
                 icon="AllIcons.Actions.Cancel" />
         
-        <action id="fish.payara.cloud.actions.CloudLoginAction"
-                class="fish.payara.cloud.actions.CloudLoginAction"
-                text="Login to Payara Cloud"
-                description="Login to Payara Cloud"
+        <action id="fish.payara.qube.actions.QubeLoginAction"
+                class="fish.payara.qube.actions.QubeLoginAction"
+                text="Login to Payara Qube"
+                description="Login to Payara Qube"
                 icon="AllIcons.Actions.Show" />
         
-        <action id="fish.payara.cloud.actions.CloudDevAction"
-                class="fish.payara.cloud.actions.CloudDevAction"
-                text="Start Payara Cloud Application in DevMode"
-                description="Start Payara Cloud Application in DevMode"
+        <action id="fish.payara.qube.actions.QubeDevAction"
+                class="fish.payara.qube.actions.QubeDevAction"
+                text="Start Payara Qube Application in DevMode"
+                description="Start Payara Qube Application in DevMode"
                 icon="AllIcons.Actions.Refresh" />
         
-        <action id="fish.payara.cloud.actions.CloudDeployAction"
-                class="fish.payara.cloud.actions.CloudDeployAction"
-                text="Deploy Payara Cloud Application"
-                description="Deploy Payara Cloud Application"
+        <action id="fish.payara.qube.actions.QubeDeployAction"
+                class="fish.payara.qube.actions.QubeDeployAction"
+                text="Deploy Payara Qube Application"
+                description="Deploy Payara Qube Application"
                 icon="AllIcons.Actions.Execute" />
         
-        <action id="fish.payara.cloud.actions.CloudUndeployAction"
-                class="fish.payara.cloud.actions.CloudUndeployAction"
-                text="Undeploy Payara Cloud Application"
-                description="Undeploy Payara Cloud Application"
+        <action id="fish.payara.qube.actions.QubeUndeployAction"
+                class="fish.payara.qube.actions.QubeUndeployAction"
+                text="Undeploy Payara Qube Application"
+                description="Undeploy Payara Qube Application"
                 icon="AllIcons.Actions.Close" />
 
-        <action id="fish.payara.cloud.actions.CloudListApplicationAction"
-                class="fish.payara.cloud.actions.CloudListApplicationAction"
-                text="List Payara Cloud Applications"
-                description="List Payara Cloud Applications"
+        <action id="fish.payara.qube.actions.QubeListApplicationAction"
+                class="fish.payara.qube.actions.QubeListApplicationAction"
+                text="List Payara Qube Applications"
+                description="List Payara Qube Applications"
                 icon="AllIcons.Actions.Find" />
 
-        <action id="fish.payara.cloud.actions.CloudListNamespaceAction"
-                class="fish.payara.cloud.actions.CloudListNamespaceAction"
-                text="List Payara Cloud Namespaces"
-                description="List Payara Cloud Namespaces"
+        <action id="fish.payara.qube.actions.QubeListNamespaceAction"
+                class="fish.payara.qube.actions.QubeListNamespaceAction"
+                text="List Payara Qube Namespaces"
+                description="List Payara Qube Namespaces"
                 icon="AllIcons.Actions.Find" />
 
-        <action id="fish.payara.cloud.actions.CloudListSubscriptionAction"
-                class="fish.payara.cloud.actions.CloudListSubscriptionAction"
-                text="List Payara Cloud Subscriptions"
-                description="List Payara Cloud Subscriptions"
+        <action id="fish.payara.qube.actions.QubeListSubscriptionAction"
+                class="fish.payara.qube.actions.QubeListSubscriptionAction"
+                text="List Payara Qube Subscriptions"
+                description="List Payara Qube Subscriptions"
                 icon="AllIcons.Actions.Find" />
 
         <action id="fish.payara.micro.actions.MicroStartAction"
